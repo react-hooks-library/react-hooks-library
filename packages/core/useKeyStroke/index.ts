@@ -64,7 +64,9 @@ export function useKeyStroke(
     (e: KeyboardEvent) => {
       const eventKey = code ? e.code : e.key
 
-      keys.includes(eventKey) && handler(e)
+      const matches =
+        typeof keys === 'string' ? keys === eventKey : keys.includes(eventKey)
+      if (matches) handler(e)
     },
     [code, handler, keys]
   )
